@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { OrderItem } from './OrderItem';
 import { useTranslations } from 'next-intl';
+import { useWindow } from '../../hooks/useWindow';
 import { OrdersType } from '../../types/order';
 import { IconField } from 'primereact/iconfield';
 import { InputIcon } from 'primereact/inputicon';
@@ -22,6 +23,7 @@ export const OrdersList: React.FC<OrdersListProps> = ({
     setOrder,
 }) => {
     const t = useTranslations('OrdersPage');
+    const { isMobile } = useWindow();
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [selectedFilter, setSelectedFilter] = useState<string>('name');
 
@@ -67,7 +69,7 @@ export const OrdersList: React.FC<OrdersListProps> = ({
     return (
         <div
             style={{ width: '40rem', height: '84vh' }}
-            className="flex flex-col w-full shadow-sm py-6 relative bg-white h-full"
+            className={`flex flex-col w-full shadow-sm py-6 relative bg-white h-full`}
         >
             <div className="flex flex-row gap-1 w-full h-fit p-4 sticky top-0">
                 <IconField iconPosition="left">
@@ -90,7 +92,9 @@ export const OrdersList: React.FC<OrdersListProps> = ({
                     panelClassName="text-sm"
                 />
             </div>
-            <div className="flex flex-col gap-4 items-start overflow-auto h-full p-4 w-full">
+            <div
+                className={`flex flex-col gap-4 items-start overflow-auto h-full p-4  ${isMobile && 'pb-24'} w-full`}
+            >
                 {filteredOrders.map((order, index: number) => (
                     <OrderItem key={index} order={order} setOrder={setOrder} />
                 ))}

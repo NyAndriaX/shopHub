@@ -37,7 +37,7 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({
 
     return (
         <div
-            className={`flex flex-col w-full relative gap-4 ${!isMobile ? 'h-[85vh]' : 'h-full'} pb-24 overflow-auto`}
+            className={`flex flex-col w-full relative gap-4 ${!isMobile ? 'h-[85vh]' : 'h-full pb-24'} overflow-auto`}
         >
             <Card className="w-full shadow-sm">
                 <OrderProduct order={order} />
