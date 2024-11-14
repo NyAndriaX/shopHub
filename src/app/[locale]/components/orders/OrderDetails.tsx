@@ -29,7 +29,7 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({
                     </p>
                 </div>
                 <p className="text-sm">
-                    {t('Please select an order to view details.')}
+                    {t('Please select an order to view details')}
                 </p>
             </div>
         );
