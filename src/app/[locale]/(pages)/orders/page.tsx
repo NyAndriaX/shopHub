@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { OrdersList, OrderDetails } from '@/app/components/orders';
+import { OrdersList, OrderDetails } from '@/app/[locale]/components/orders';
 import { Divider } from 'primereact/divider';
 
 const OrdersPage: React.FC = () => {

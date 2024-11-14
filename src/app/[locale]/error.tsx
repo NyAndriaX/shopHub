@@ -9,10 +9,10 @@ export default function Error() {
         <div className="flex flex-col justify-between h-[80vh] ">
             <div className="flex-grow flex px-4 flex-col gap-4 items-center justify-center ">
                 <h4 className="scroll-m-20 text-base font-bold tracking-normal">
-                    Désolé, quelque chose s&apos;est mal passé!
+                    Sorry, something went wrong!
                 </h4>
                 <Button size="small">
-                    <Link href={'/'}>Retour</Link>
+                    <Link href={'/'}>Back</Link>
                 </Button>
             </div>
         </div>

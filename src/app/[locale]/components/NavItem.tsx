@@ -10,13 +10,14 @@ interface NavItemProps {
 export const NavItem: React.FC<NavItemProps> = ({ item, isHovered }) => {
     if (!isHovered) {
         return (
-            <Button
-                size="small"
-                severity="secondary"
-                text
-                icon={item.icon}
-                className={`text-gray-900 bg-white ${item.className}`}
-            />
+            <div className="flex flex-row justify-center w-full bg-white">
+                <Button
+                    severity="secondary"
+                    text
+                    icon={item.icon}
+                    className={`text-gray-900 bg-white ${item.className}`}
+                />
+            </div>
         );
     }
     return (

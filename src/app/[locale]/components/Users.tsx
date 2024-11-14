@@ -4,7 +4,7 @@ import { Avatar } from 'primereact/avatar';
 export const Users: React.FC = () => {
     return (
         <div className="flex flex-row gap-2 items-center">
-            <p className="text-gray-900">John Doe</p>
+            <p className="text-gray-700 text-sm">John Doe</p>
             <Avatar
                 image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png"
                 shape="circle"
