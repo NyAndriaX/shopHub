@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { OrderItem } from './OrderItem';
+import { useTranslations } from 'next-intl';
 import { OrdersType } from '../../types/order';
 import { IconField } from 'primereact/iconfield';
 import { InputIcon } from 'primereact/inputicon';
@@ -20,12 +21,13 @@ export const OrdersList: React.FC<OrdersListProps> = ({
     ordersData,
     setOrder,
 }) => {
+    const t = useTranslations('OrdersPage');
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [selectedFilter, setSelectedFilter] = useState<string>('name');
 
     const filterOptions: FilterOptions[] = [
         {
-            name: 'Name',
+            name: t('Name'),
             value: 'name',
         },
         {
@@ -71,7 +73,7 @@ export const OrdersList: React.FC<OrdersListProps> = ({
                 <IconField iconPosition="left">
                     <InputIcon className="pi pi-search " />
                     <InputText
-                        placeholder="Rechercher"
+                        placeholder={t('Search')}
                         className="p-inputtext-sm w-full"
                         style={{ paddingLeft: '2.5rem' }}
                         value={searchTerm}

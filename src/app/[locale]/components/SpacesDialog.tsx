@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 interface SpacesDialogProps {
     visible: boolean;
@@ -13,6 +14,7 @@ export const SpacesDialog: React.FC<SpacesDialogProps> = ({
     onHide,
     positionLeft,
 }) => {
+    const t = useTranslations('Navbar');
     return (
         <div className={`relative ${visible ? 'flex' : 'hidden'}`}>
             <div
@@ -25,17 +27,17 @@ export const SpacesDialog: React.FC<SpacesDialogProps> = ({
             >
                 <div className="flex flex-col gap-8 items-start py-8 px-6 text-gray-900">
                     <div className="flex flex-col gap-8 items-start w-full">
-                        <h2 className="text-lg font-semibold">Espaces</h2>
+                        <h2 className="text-lg font-semibold">{t('Spaces')}</h2>
                         <div className="flex flex-col gap-4 bg-gray-50 p-4 rounded-md w-full shadow-sm">
                             <p className="text-sm font-semibold text-gray-500">
-                                Intégrez votre site
+                                {t('Integrate your site')}
                             </p>
                             <Link
                                 className="flex items-center text-sm font-bold gap-2 w-fit border-b border-gray-900 pb-1"
                                 href="/pages/member/topic"
                                 onClick={onHide}
                             >
-                                <span>Ajouter un site</span>
+                                <span>{t('Add a site')}</span>
                                 <span
                                     className="pi pi-arrow-right text-gray-500"
                                     style={{ fontSize: '0.8rem' }}

@@ -7,10 +7,38 @@
         "Browse": "Browse",
         "Home": "Home",
         "Add a site": "Add a site",
-        "Addition": "Addition"
+        "Addition": "Addition",
+        "Integrate your site": "Integrate your site"
     },
     "IndexPage": {
         "Orders": "Orders",
+        "Order": "Order",
         "Products": "Products"
+    },
+    "OrdersPage": {
+        "Orders": "Orders",
+        "Order": "Order",
+        "Products": "Products",
+        "Search": "Search",
+        "Name": "Name",
+        "First name": "First name",
+        "Phone": "Phone",
+        "Product Lists": "Product Lists",
+        "Order Address Details": "Order Address Details",
+        "Price": "Price",
+        "Quantities": "Quantities",
+        "Contact Information": "Contact Information",
+        "Residence Address": "Residence Address",
+        "Code postal": "Postcode",
+        "Address": "Address",
+        "Country": "Country",
+        "City": "City",
+        "State": "State",
+        "To validate": "To validate",
+        "Company name": "Company name",
+        "Geographic Location": "Geographic Location",
+        "Professional Contact Information": "Professional Contact Information",
+        "No command selected": "No command selected",
+        "Please select an order to view details.": "Please select an order to view details."
     }
 }

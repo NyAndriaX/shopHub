@@ -3,10 +3,12 @@
 import React, { useState, useEffect } from 'react';
 import ordersData from '@/mocks/index.json';
 import { Divider } from 'primereact/divider';
+import { useWindow } from '../../hooks/useWindow';
 import { OrdersType } from '../../types/order';
 import { OrdersList, OrderDetails } from '@/app/[locale]/components/orders';
 
 const OrdersPage: React.FC = () => {
+    const { isDesktop, isMobile } = useWindow();
     const [orders, setOrders] = useState<OrdersType[] | []>([]);
     const [order, setOrder] = useState<OrdersType | null>(null);
 
@@ -16,7 +18,7 @@ const OrdersPage: React.FC = () => {
                 ? (ordersData.orders as unknown as OrdersType[])
                 : [];
             setOrders(loadedOrders);
-            if (loadedOrders.length > 0) {
+            if (loadedOrders.length > 0 && isDesktop) {
                 setOrder(loadedOrders[0]);
             }
         };
@@ -25,9 +27,17 @@ const OrdersPage: React.FC = () => {
 
     return (
         <div className="flex flex-row gap-4 w-full h-full overflow-hidden">
-            <OrdersList ordersData={orders} setOrder={setOrder} />
-            <Divider layout="vertical" />
-            <OrderDetails order={order} />
+            {(isMobile && !order) || isDesktop ? (
+                <OrdersList ordersData={orders} setOrder={setOrder} />
+            ) : (
+                <></>
+            )}
+            {isDesktop && <Divider layout="vertical" />}
+            {(isMobile && order) || isDesktop ? (
+                <OrderDetails order={order} setOrder={setOrder} />
+            ) : (
+                <></>
+            )}
         </div>
     );
 };

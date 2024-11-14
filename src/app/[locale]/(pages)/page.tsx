@@ -2,6 +2,7 @@
 
 import React, { useState, Suspense, lazy } from 'react';
 import { MainLayout } from '../components';
+import { useTranslations } from 'next-intl';
 import { TabMenu } from 'primereact/tabmenu';
 import { MenuItem } from 'primereact/menuitem';
 import { ProgressSpinner } from 'primereact/progressspinner';
@@ -10,10 +11,11 @@ const OrdersPage = lazy(() => import('./orders/page'));
 const ProductPage = lazy(() => import('./product/page'));
 
 const MainPage: React.FC = () => {
+    const t = useTranslations('IndexPage');
     const [activeIndex, setActiveIndex] = useState<number>(0);
     const items: MenuItem[] = [
-        { label: 'Orders', icon: 'pi pi-shopping-cart' },
-        { label: 'Products', icon: 'pi pi-list' },
+        { label: t('Orders'), icon: 'pi pi-shopping-cart' },
+        { label: t('Products'), icon: 'pi pi-list' },
     ];
     return (
         <MainLayout headers="Nom du Site 1">

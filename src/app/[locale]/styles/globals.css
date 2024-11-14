@@ -29,3 +29,7 @@ body {
 .p-menuitem-link {
     background: none;
 }
+
+.p-icon-field {
+    width: 100%;
+}

@@ -2,6 +2,7 @@
 import React, { useState, useRef } from 'react';
 import { Toast } from 'primereact/toast';
 import { validate } from '../../utils';
+import { useTranslations } from 'next-intl';
 import { addressSchema } from '../../validators';
 import { InputText } from 'primereact/inputtext';
 import { OrdersType } from '../../types/order';
@@ -23,6 +24,7 @@ interface OrderAddressProps {
 }
 
 export const OrderAddress: React.FC<OrderAddressProps> = ({ order }) => {
+    const t = useTranslations('OrdersPage');
     const toast = useRef<Toast>(null);
     const [isEditing, setIsEditing] = useState<boolean>(false);
 
@@ -58,7 +60,7 @@ export const OrderAddress: React.FC<OrderAddressProps> = ({ order }) => {
             <div className="flex flex-col gap-4">
                 <div className="flex flex-row mb-4 items-center justify-between">
                     <h2 className="text-lg font-semibold">
-                        Détails de l&apos;Adresse de la Commande
+                        {t('Order Address Details')}
                     </h2>
                     {!isEditing && (
                         <i
@@ -93,12 +95,12 @@ export const OrderAddress: React.FC<OrderAddressProps> = ({ order }) => {
                                         {/* --------------- Informations de Contact ----------------------- */}
                                         <div className="flex flex-col gap-2 w-full">
                                             <h3 className="font-semibold">
-                                                Informations de Contact :
+                                                {t('Contact Information')} :
                                             </h3>
                                             <div className="flex flex-wrap gap-4">
                                                 <div className="flex flex-col gap-2 w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)]">
                                                     <label htmlFor="last_name">
-                                                        Nom{' '}
+                                                        {t('Name')}{' '}
                                                         <span className="text-red-500">
                                                             *
                                                         </span>
@@ -106,7 +108,7 @@ export const OrderAddress: React.FC<OrderAddressProps> = ({ order }) => {
                                                     <Field
                                                         name="last_name"
                                                         as={InputText}
-                                                        placeholder="Nom"
+                                                        placeholder={t('Name')}
                                                         className={`p-inputtext rounded-md ${
                                                             errors.last_name &&
                                                             touched.last_name
@@ -123,7 +125,7 @@ export const OrderAddress: React.FC<OrderAddressProps> = ({ order }) => {
                                                 </div>
                                                 <div className="flex flex-col gap-2 w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)]">
                                                     <label htmlFor="first_name">
-                                                        Prénom{' '}
+                                                        {t('First name')}{' '}
                                                         <span className="text-red-500">
                                                             *
                                                         </span>
@@ -131,7 +133,9 @@ export const OrderAddress: React.FC<OrderAddressProps> = ({ order }) => {
                                                     <Field
                                                         name="first_name"
                                                         as={InputText}
-                                                        placeholder="Prénom"
+                                                        placeholder={t(
+                                                            'First name',
+                                                        )}
                                                         className={`p-inputtext rounded-md ${
                                                             errors.first_name &&
                                                             touched.first_name
@@ -178,7 +182,7 @@ export const OrderAddress: React.FC<OrderAddressProps> = ({ order }) => {
                                         {/* --------------- Adresse de Résidence ----------------------- */}
                                         <div className="flex flex-col gap-2 w-full">
                                             <h3 className="font-semibold">
-                                                Adresse de Résidence :
+                                                {t('Residence Address')} :
                                             </h3>
                                             <div className="flex flex-wrap gap-4">
                                                 <div className="flex flex-col gap-2 w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)]">
@@ -259,7 +263,7 @@ export const OrderAddress: React.FC<OrderAddressProps> = ({ order }) => {
                                         {/* --------------- Localisation Géographique ----------------------- */}
                                         <div className="flex flex-col gap-2 w-full">
                                             <h3 className="font-semibold">
-                                                Localisation Géographique :
+                                                {t('Geographic Location')} :
                                             </h3>
                                             <div className="flex flex-wrap gap-4">
                                                 <div className="flex flex-col gap-2 w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)]">
@@ -419,7 +423,10 @@ export const OrderAddress: React.FC<OrderAddressProps> = ({ order }) => {
                                         {/* --------------- Coordonnées Professionnelles ----------------------- */}
                                         <div className="flex flex-col gap-2 w-full">
                                             <h3 className="font-semibold">
-                                                Coordonnées Professionnelles :
+                                                {t(
+                                                    'Professional Contact Information',
+                                                )}
+                                                :
                                             </h3>
                                             <div className="flex flex-wrap gap-4">
                                                 <div className="flex flex-col gap-2 w-full md:w-[calc(50%-1rem)] lg:w-[calc(50%-1rem)]">
@@ -497,12 +504,12 @@ export const OrderAddress: React.FC<OrderAddressProps> = ({ order }) => {
                                 {/* --------------- Informations de Contact ----------------------- */}
                                 <div className="flex flex-col gap-2 w-full">
                                     <h3 className="font-semibold">
-                                        Informations de Contact :
+                                        {t('Contact Information')} :
                                     </h3>
                                     <div className="flex flex-wrap gap-4 w-full">
                                         <div className="flex-1 min-w-[12rem] bg-gray-100 rounded border max-w-full md:max-w-[33%] h-auto p-2">
                                             <div className="font-medium">
-                                                Nom:
+                                                {t('Name')}:
                                             </div>
                                             <div>
                                                 {order?.address.last_name}
@@ -510,7 +517,7 @@ export const OrderAddress: React.FC<OrderAddressProps> = ({ order }) => {
                                         </div>
                                         <div className="flex-1 min-w-[12rem] bg-gray-100 rounded border max-w-full md:max-w-[33%] h-auto p-2">
                                             <div className="font-medium">
-                                                Prénom:
+                                                {t('First name')}:
                                             </div>
                                             <div>
                                                 {order?.address.first_name}
@@ -518,7 +525,7 @@ export const OrderAddress: React.FC<OrderAddressProps> = ({ order }) => {
                                         </div>
                                         <div className="flex-1 min-w-[12rem] bg-gray-100 rounded max-w-full md:max-w-[33%] h-auto p-2">
                                             <div className="font-medium">
-                                                Téléphone:
+                                                {t('Phone')}:
                                             </div>
                                             <div>{order?.address.phone}</div>
                                         </div>
@@ -528,7 +535,7 @@ export const OrderAddress: React.FC<OrderAddressProps> = ({ order }) => {
                                 {/* --------------- Adresse de Résidence ----------------------- */}
                                 <div className="flex flex-col gap-4 w-full">
                                     <h3 className="font-semibold">
-                                        Adresse de Résidence :
+                                        {t('Residence Address')} :
                                     </h3>
                                     <div className="flex flex-wrap gap-4 w-full">
                                         <div className="flex-1 min-w-[12rem] bg-gray-100 rounded max-w-full md:max-w-[33%] h-auto p-2">
@@ -560,7 +567,7 @@ export const OrderAddress: React.FC<OrderAddressProps> = ({ order }) => {
                                 {/* --------------- Localisation Géographique ----------------------- */}
                                 <div className="flex flex-col gap-4 w-full">
                                     <h3 className="font-semibold">
-                                        Localisation Géographique :
+                                        {t('Geographic Location')} :
                                     </h3>
                                     <div className="flex flex-wrap gap-4 w-full">
                                         <div className="flex-1 min-w-[12rem] bg-gray-100 rounded max-w-full md:max-w-[33%] h-auto p-2">
@@ -589,7 +596,8 @@ export const OrderAddress: React.FC<OrderAddressProps> = ({ order }) => {
                                 {/* --------------- Coordonnées Professionnelles ----------------------- */}
                                 <div className="flex flex-col gap-4 w-full">
                                     <h3 className="font-semibold">
-                                        Coordonnées Professionnelles :
+                                        {t('Professional Contact Information')}{' '}
+                                        :
                                     </h3>
                                     <div className="flex flex-wrap gap-4 w-full">
                                         <div className="flex-1 min-w-[12rem] bg-gray-100 rounded max-w-full md:max-w-[50%] h-auto p-2">

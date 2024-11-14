@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { Carousel } from 'primereact/carousel';
 import { OrdersType, ProductType } from '../../types/order';
@@ -8,6 +9,7 @@ interface OrderProductProps {
 }
 
 export const OrderProduct: React.FC<OrderProductProps> = ({ order }) => {
+    const t = useTranslations('OrdersPage');
     const currency = order?.currency;
     const products = order?.products;
 
@@ -30,10 +32,10 @@ export const OrderProduct: React.FC<OrderProductProps> = ({ order }) => {
             <div>
                 <h4 className="mb-1 font-semibold">{product.name}</h4>
                 <h6 className="mt-1 text-sm">
-                    Prix : {currency} {product.price}
+                    {t('Price')} : {currency} {product.price}
                 </h6>
                 <h6 className="mt-1 text-sm">
-                    Quantité(s) : {product.quantity}
+                    {t('Quantities')} : {product.quantity}
                 </h6>
                 <h6 className="mt-1 mb-3 text-sm">SKU : {product.sku}</h6>
             </div>
@@ -44,7 +46,7 @@ export const OrderProduct: React.FC<OrderProductProps> = ({ order }) => {
         <div className="card">
             <div className="mb-4">
                 <h2 className="text-lg text-gray-900 font-semibold">
-                    Liste des produits
+                    {t('Product Lists')}
                 </h2>
                 <Link
                     href="/"
@@ -52,7 +54,7 @@ export const OrderProduct: React.FC<OrderProductProps> = ({ order }) => {
                     rel="noopener noreferrer"
                     className="text-blue-500 font-normal text-sm hover:underline"
                 >
-                    ID commande: 11966
+                    ID {t('Order').toLowerCase()}: 11966
                 </Link>
             </div>
             <Carousel

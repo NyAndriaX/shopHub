@@ -7,10 +7,35 @@
         "Browse": "Parcourir",
         "Home": "Acceuil",
         "Add a site": "Ajouter un site",
-        "Addition": "Ajout"
+        "Addition": "Ajout",
+        "Integrate your site": "Intégrez votre site"
     },
     "IndexPage": {
         "Orders": "Commandes",
+        "Order": "Commande",
         "Products": "Produits"
+    },
+    "OrdersPage": {
+        "Search": "Recherchez",
+        "Name": "Nom",
+        "First name": "Prénom",
+        "Phone": "Téléphone",
+        "Product Lists": "Listes des produits",
+        "Order Address Details": "Détails de l'Adresse de la Commande",
+        "Price": "Prix",
+        "Quantities": "Quantité(s)",
+        "Contact Information": "Informations de Contact",
+        "Residence Address": "Adresse de Résidence",
+        "Code postal": "Postcode",
+        "Address": "Adresse",
+        "Country": "Pays",
+        "City": "Ville",
+        "State": "État",
+        "To validate": "Valider",
+        "Company name": "Raison sociale",
+        "Geographic Location": "Localisation Géographique",
+        "Professional Contact Information": "Coordonnées Professionnelles",
+        "No command selected": "Aucune commande sélectionnée",
+        "Please select an order to view details": "Veuillez sélectionner une commande pour afficher les détails"
     }
 }
