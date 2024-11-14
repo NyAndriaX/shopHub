@@ -13,7 +13,7 @@ const Layout = ({ children }: LayoutProps) => {
     return (
         <div
             style={{ zoom: '0.9' }}
-            className={`flex flex-row gap-4 w-full h-full overflow-auto`}
+            className={`flex ${!isMobile ? 'flex-row' : 'flex-col-reverse'} gap-4 w-full h-full overflow-auto`}
         >
             {isMobile ? <MobileNavbar /> : <Navbar />}
             <div className={`w-full h-full`}>{children}</div>

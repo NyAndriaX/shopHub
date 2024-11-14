@@ -16,7 +16,7 @@ interface LocalSwitcherProps {
     isHovered: boolean;
 }
 
-export const LocalSwitcher: React.FC<LocalSwitcherProps> = ({ isHovered }) => {
+const LocalSwitcher: React.FC<LocalSwitcherProps> = ({ isHovered }) => {
     const router = useRouter();
     const localActive = useLocale();
     const [isPending, startTransition] = useTransition();
@@ -45,7 +45,7 @@ export const LocalSwitcher: React.FC<LocalSwitcherProps> = ({ isHovered }) => {
     if (!isHovered) {
         const currentCode = localActive === 'en' ? 'US' : 'FR';
         return (
-            <div className="flex flex-row items-center rounded p-2">
+            <div className="flex flex-row border border-gray-300 bg-gray-100 items-center rounded p-2">
                 <Flag code={currentCode} className="w-6 h-4" />
             </div>
         );
@@ -64,3 +64,5 @@ export const LocalSwitcher: React.FC<LocalSwitcherProps> = ({ isHovered }) => {
         />
     );
 };
+
+export default LocalSwitcher;

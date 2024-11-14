@@ -1,41 +1,16 @@
 import React from 'react';
 import Link from 'next/link';
 import { Carousel } from 'primereact/carousel';
+import { OrdersType, ProductType } from '../../types/order';
 
-type ProductType = {
-    name: string;
-    price: number;
-    quantity: number;
-    sku: string;
-    image: string;
-};
+interface OrderProductProps {
+    order: OrdersType | null;
+}
 
-const products: ProductType[] = [
-    {
-        name: 'Produit A',
-        price: 29.99,
-        quantity: 2,
-        sku: 'SKU12345',
-        image: 'https://www.bibbilyboo.co.uk/cdn/shop/files/triangle_dots_2_1200x1200.png?v=1718295688',
-    },
-    {
-        name: 'Produit B',
-        price: 19.99,
-        quantity: 1,
-        sku: 'SKU67890',
-        image: 'https://www.bibbilyboo.co.uk/cdn/shop/files/triangle_dots_2_1200x1200.png?v=1718295688',
-    },
-    {
-        name: 'Produit C',
-        price: 39.99,
-        quantity: 3,
-        sku: 'SKU11223',
-        image: 'https://www.bibbilyboo.co.uk/cdn/shop/files/triangle_dots_2_1200x1200.png?v=1718295688',
-    },
-];
+export const OrderProduct: React.FC<OrderProductProps> = ({ order }) => {
+    const currency = order?.currency;
+    const products = order?.products;
 
-export const OrderProduct: React.FC = () => {
-    const currency = '€';
     const responsiveOptions = [
         { breakpoint: '1400px', numVisible: 2, numScroll: 1 },
         { breakpoint: '1199px', numVisible: 3, numScroll: 1 },

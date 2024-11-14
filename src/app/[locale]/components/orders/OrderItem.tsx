@@ -1,5 +1,7 @@
 import React from 'react';
+import dayjs from 'dayjs';
 import { Badge } from 'primereact/badge';
+import { OrdersType } from '../../types/order';
 
 const OrderStatus: React.FC<{ status: string }> = ({ status }) => {
     switch (status) {
@@ -14,17 +16,33 @@ const OrderStatus: React.FC<{ status: string }> = ({ status }) => {
     }
 };
 
-export const OrderItem: React.FC = () => {
+interface OrderItemProps {
+    order: OrdersType;
+    setOrder: React.Dispatch<React.SetStateAction<OrdersType | null>>;
+}
+
+export const OrderItem: React.FC<OrderItemProps> = ({ order, setOrder }) => {
     return (
-        <div className="flex flex-row p-2 items-center gap-3 rounded-md cursor-pointer shadow-sm bg-white hover:bg-gray-100 w-full">
+        <div
+            onClick={() => setOrder(order)}
+            className="flex flex-row py-2 px-4 items-center gap-3 rounded-md cursor-pointer shadow-sm bg-white hover:bg-gray-100 w-full"
+        >
             <div className="flex flex-col gap-2 w-full">
-                <span className="font-bold text-gray-900">John Doe</span>
-                <span className="text-xs text-gray-900">Date : 19/04/2024</span>
+                <span className="font-bold text-gray-900">
+                    {order.address.first_name} {order.address.last_name}
+                </span>
+                <span className="text-xs text-gray-900">ID : {order._id}</span>
                 <span className="text-xs text-gray-900">
-                    State : <OrderStatus status="COMPLETED" />
+                    {dayjs(order.createdAt).format('DD/MM/YYYY')}
+                </span>
+                <span className="text-xs text-gray-900">
+                    <OrderStatus status={order.status} />
                 </span>
             </div>
-            <span className="font-bold text-gray-900">$19</span>
+            <span className="font-bold text-gray-900">
+                {order.currency}
+                {order.total}
+            </span>
         </div>
     );
 };

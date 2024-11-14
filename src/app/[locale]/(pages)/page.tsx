@@ -16,7 +16,7 @@ const MainPage: React.FC = () => {
         { label: 'Products', icon: 'pi pi-list' },
     ];
     return (
-        <MainLayout headers="Site 1">
+        <MainLayout headers="Nom du Site 1">
             <div className="flex flex-col gap-4 items-start w-full">
                 <TabMenu
                     model={items}

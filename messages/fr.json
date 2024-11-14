@@ -2,6 +2,15 @@
     "Navbar": {
         "Spaces": "Espaces",
         "My account": "Mon compte",
-        "Log out": "Se déconnecter"
+        "Log out": "Se déconnecter",
+        "Billing": "Facturation",
+        "Browse": "Parcourir",
+        "Home": "Acceuil",
+        "Add a site": "Ajouter un site",
+        "Addition": "Ajout"
+    },
+    "IndexPage": {
+        "Orders": "Commandes",
+        "Products": "Produits"
     }
 }

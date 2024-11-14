@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { Logo } from './Logo';
 import { NavItem } from './NavItem';
 import { useTranslations } from 'next-intl';
-import { LocalSwitcher } from './local-switcher';
+import { SpacesDialog } from './SpacesDialog';
 import { MenuItem } from 'primereact/menuitem';
 import { PanelMenu } from 'primereact/panelmenu';
+import { ProgressSpinner } from 'primereact/progressspinner';
+
+const LocalSwitcher = React.lazy(() => import('./local-switcher'));
 
 export const Navbar: React.FC = () => {
     const t = useTranslations('Navbar');
+    const [visible, setVisible] = useState<boolean>(false);
     const [isHovered, setIsHovered] = useState<boolean>(true);
 
     const items: MenuItem[] = [
@@ -16,13 +20,21 @@ export const Navbar: React.FC = () => {
             label: t('Spaces'),
             icon: 'pi pi-globe',
             template: (item) => <NavItem isHovered={isHovered} item={item} />,
+            command: () => {
+                setVisible((prevValue) => !prevValue);
+            },
+        },
+        {
+            id: '03',
+            label: t('Billing'),
+            icon: 'pi pi-credit-card',
+            template: (item) => <NavItem isHovered={isHovered} item={item} />,
             command: () => {},
         },
         {
             id: '02',
             label: t('My account'),
             icon: 'pi pi-user',
-            className: 'mt-1',
             template: (item) => <NavItem isHovered={isHovered} item={item} />,
             command: () => {},
         },
@@ -30,7 +42,7 @@ export const Navbar: React.FC = () => {
             id: '06',
             label: t('Log out'),
             icon: 'pi pi-sign-out',
-            className: 'text-red-500',
+            className: 'text-red-500 mt-1',
             template: (item) => <NavItem isHovered={isHovered} item={item} />,
             command: () => {},
         },
@@ -47,7 +59,10 @@ export const Navbar: React.FC = () => {
 
     return (
         <div
-            style={{ width: isHovered ? '21.4rem' : '7rem' }}
+            style={{
+                width: isHovered ? '21.4rem' : '7rem',
+                transition: 'width 0.3s ease',
+            }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             className="relative rounded-md"
@@ -64,8 +79,25 @@ export const Navbar: React.FC = () => {
                         className={`flex flex-col w-full`}
                     />
                 </div>
-                <LocalSwitcher isHovered={isHovered} />
+                <Suspense
+                    fallback={
+                        <ProgressSpinner
+                            style={{ width: '30px', height: '30px' }}
+                            strokeWidth="8"
+                            fill="var(--surface-ground)"
+                            animationDuration=".5s"
+                        />
+                    }
+                >
+                    <LocalSwitcher isHovered={isHovered} />
+                </Suspense>
             </div>
+            <SpacesDialog
+                visible={visible}
+                positionLeft={isHovered ? 273 : 80}
+                // setVisible={setVisible}
+                onHide={() => setVisible(false)}
+            />
         </div>
     );
 };
