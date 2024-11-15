@@ -2,6 +2,7 @@
 import './styles/globals.css';
 
 import React from 'react';
+import SessionProviderWrapper from './utils/sessionProviderWrapper';
 import 'primereact/resources/themes/lara-light-cyan/theme.css';
 import { PrimeReactProvider } from 'primereact/api';
 import { NextIntlClientProvider } from 'next-intl';
@@ -20,22 +21,21 @@ export default async function RootLayout({
     children,
     params: { locale },
 }: Readonly<{ children: React.ReactNode; params: { locale: string } }>) {
-    // Ensure that the incoming `locale` is valid
     if (!routing.locales.includes(locale as any)) {
         notFound();
     }
 
-    // Providing all messages to the client
-    // side is the easiest way to get started
     const messages = await getMessages();
 
     return (
-        <html lang={locale}>
-            <body suppressHydrationWarning>
-                <NextIntlClientProvider messages={messages}>
-                    <PrimeReactProvider>{children}</PrimeReactProvider>
-                </NextIntlClientProvider>
-            </body>
-        </html>
+        <SessionProviderWrapper>
+            <html lang={locale}>
+                <body suppressHydrationWarning>
+                    <NextIntlClientProvider messages={messages}>
+                        <PrimeReactProvider>{children}</PrimeReactProvider>
+                    </NextIntlClientProvider>
+                </body>
+            </html>
+        </SessionProviderWrapper>
     );
 }
