@@ -71,27 +71,33 @@ export const OrdersList: React.FC<OrdersListProps> = ({
             style={{ width: '40rem', height: '84vh' }}
             className={`flex flex-col w-full shadow-sm py-6 relative bg-white h-full`}
         >
-            <div className="flex flex-row gap-1 w-full h-fit p-4 sticky top-0">
-                <IconField iconPosition="left">
-                    <InputIcon className="pi pi-search " />
-                    <InputText
-                        placeholder={t('Search')}
-                        className="p-inputtext-sm w-full"
-                        style={{ paddingLeft: '2.5rem' }}
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
+            <div className="flex flex-col gap-4 w-full  h-fit p-4 sticky top-0 rounded-md">
+                <p className="text-xs text-gray-500">
+                    Veillez choisir une commande dans la liste ci-dessous
+                </p>
+                <div className="flex flex-row gap-1 w-full h-fit ">
+                    <IconField iconPosition="left">
+                        <InputIcon className="pi pi-search " />
+                        <InputText
+                            placeholder={t('Search')}
+                            className="p-inputtext-sm w-full"
+                            style={{ paddingLeft: '2.5rem' }}
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                    </IconField>
+                    <Dropdown
+                        value={selectedFilter}
+                        onChange={(e: DropdownChangeEvent) =>
+                            setSelectedFilter(e.value)
+                        }
+                        options={filterOptions}
+                        optionLabel="name"
+                        panelClassName="text-sm"
                     />
-                </IconField>
-                <Dropdown
-                    value={selectedFilter}
-                    onChange={(e: DropdownChangeEvent) =>
-                        setSelectedFilter(e.value)
-                    }
-                    options={filterOptions}
-                    optionLabel="name"
-                    panelClassName="text-sm"
-                />
+                </div>
             </div>
+
             <div
                 className={`flex flex-col gap-4 items-start overflow-auto h-full p-4  ${isMobile && 'pb-24'} w-full`}
             >

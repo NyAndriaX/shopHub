@@ -7,8 +7,12 @@ import { TabMenu } from 'primereact/tabmenu';
 import { MenuItem } from 'primereact/menuitem';
 import { ProgressSpinner } from 'primereact/progressspinner';
 
-const OrdersPage = lazy(() => import('./orders/page'));
-const ProductPage = lazy(() => import('./product/page'));
+const OrdersTabContent = lazy(
+    () => import('../components/orders/OrdersTabContent'),
+);
+const ProductsTabContent = lazy(
+    () => import('../components/products/ProductsTabContent'),
+);
 
 const MainPage: React.FC = () => {
     const t = useTranslations('IndexPage');
@@ -35,8 +39,8 @@ const MainPage: React.FC = () => {
                         />
                     }
                 >
-                    {activeIndex === 0 && <OrdersPage />}
-                    {activeIndex === 1 && <ProductPage />}
+                    {activeIndex === 0 && <OrdersTabContent />}
+                    {activeIndex === 1 && <ProductsTabContent />}
                 </Suspense>
             </div>
         </MainLayout>

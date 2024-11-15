@@ -7,7 +7,7 @@ import { useWindow } from '../../hooks/useWindow';
 import { OrdersType } from '../../types/order';
 import { OrdersList, OrderDetails } from '@/app/[locale]/components/orders';
 
-const OrdersPage: React.FC = () => {
+const OrdersTabContent: React.FC = () => {
     const { isDesktop, isMobile } = useWindow();
     const [orders, setOrders] = useState<OrdersType[] | []>([]);
     const [order, setOrder] = useState<OrdersType | null>(null);
@@ -42,4 +42,4 @@ const OrdersPage: React.FC = () => {
     );
 };
 
-export default OrdersPage;
+export default OrdersTabContent;
