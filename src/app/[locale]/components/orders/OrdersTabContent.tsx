@@ -5,12 +5,14 @@ import ordersData from '@/mocks/index.json';
 import { Divider } from 'primereact/divider';
 import { useWindow } from '../../hooks/useWindow';
 import { OrdersType } from '../../types/order';
+import { useSearchParams } from 'next/navigation';
 import { OrdersList, OrderDetails } from '@/app/[locale]/components/orders';
 
 const OrdersTabContent: React.FC = () => {
+    const search = useSearchParams();
+    const orderId = search.get('orderId');
     const { isDesktop, isMobile } = useWindow();
     const [orders, setOrders] = useState<OrdersType[] | []>([]);
-    const [order, setOrder] = useState<OrdersType | null>(null);
 
     useEffect(() => {
         const getOrders = () => {
@@ -18,26 +20,19 @@ const OrdersTabContent: React.FC = () => {
                 ? (ordersData.orders as unknown as OrdersType[])
                 : [];
             setOrders(loadedOrders);
-            if (loadedOrders.length > 0 && isDesktop) {
-                setOrder(loadedOrders[0]);
-            }
         };
         getOrders();
     }, []);
 
     return (
         <div className="flex flex-row gap-4 w-full h-full overflow-hidden">
-            {(isMobile && !order) || isDesktop ? (
-                <OrdersList ordersData={orders} setOrder={setOrder} />
+            {(isMobile && !orderId) || isDesktop ? (
+                <OrdersList ordersData={orders} />
             ) : (
                 <></>
             )}
             {isDesktop && <Divider layout="vertical" />}
-            {(isMobile && order) || isDesktop ? (
-                <OrderDetails order={order} setOrder={setOrder} />
-            ) : (
-                <></>
-            )}
+            {(isMobile && orderId) || isDesktop ? <OrderDetails /> : <></>}
         </div>
     );
 };

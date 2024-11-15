@@ -1,23 +1,58 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card } from 'primereact/card';
 import { useTranslations } from 'next-intl';
+import ordersData from '@/mocks/index.json';
 import { OrdersType } from '../../types/order';
 import { OrderAddress } from './OrderAddress';
 import { OrderProduct } from './OrderProduct';
 import { Button } from 'primereact/button';
+import { useSearchParams } from 'next/navigation';
 import { useWindow } from '../../hooks/useWindow';
+import { ProgressSpinner } from 'primereact/progressspinner';
 
-interface OrderDetailsProps {
-    order: OrdersType | null;
-    setOrder: React.Dispatch<React.SetStateAction<OrdersType | null>>;
-}
-
-export const OrderDetails: React.FC<OrderDetailsProps> = ({
-    order,
-    setOrder,
-}) => {
-    const t = useTranslations('OrdersPage');
+export const OrderDetails: React.FC = () => {
+    const search = useSearchParams();
     const { isMobile } = useWindow();
+    const t = useTranslations('OrdersPage');
+    const [order, setOrder] = useState<OrdersType | null>(null);
+    const [isFetchingOrder, setIsFetchingOrder] = useState<boolean>(false);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [order]);
+
+    useEffect(() => {
+        const orderId = search.get('orderId');
+
+        if (orderId) {
+            const fetchOrderById = () => {
+                try {
+                    setIsFetchingOrder(true);
+                    const loadedOrder = Array.isArray(ordersData.orders)
+                        ? (ordersData.orders as unknown as OrdersType[])
+                        : [];
+                    const foundOrder = loadedOrder.find(
+                        (order) => order._id === orderId,
+                    );
+                    setOrder(foundOrder || null);
+                } catch (error) {
+                    console.log(error);
+                } finally {
+                    setIsFetchingOrder(false);
+                }
+            };
+            fetchOrderById();
+        }
+    }, [search]);
+
+    if (isFetchingOrder) {
+        <ProgressSpinner
+            style={{ width: '30px', height: '30px' }}
+            strokeWidth="8"
+            fill="var(--surface-ground)"
+            animationDuration=".5s"
+        />;
+    }
 
     if (!order) {
         return (
@@ -53,16 +88,6 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({
                     outlined
                 />
             </div>
-            {isMobile && (
-                <Button
-                    size="small"
-                    icon="pi pi-angle-left"
-                    rounded
-                    outlined
-                    className="fixed bottom-24 right-8"
-                    onClick={() => setOrder(null)}
-                />
-            )}
         </div>
     );
 };

@@ -2,7 +2,8 @@ import React from 'react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { Carousel } from 'primereact/carousel';
-import { OrdersType, ProductType } from '../../types/order';
+import { ProductCard } from './ProductCard';
+import { OrdersType } from '../../types/order';
 
 interface OrderProductProps {
     order: OrdersType | null;
@@ -20,27 +21,12 @@ export const OrderProduct: React.FC<OrderProductProps> = ({ order }) => {
         { breakpoint: '575px', numVisible: 1, numScroll: 1 },
     ];
 
-    const productTemplate = (product: ProductType) => (
-        <div className="border surface-border border-round m-2 text-center py-5 px-3 max-w-[300px] rounded-md">
-            <div className="flex flex-row items-center justify-center mb-3">
-                <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-20 shadow-2"
-                />
-            </div>
-            <div>
-                <h4 className="mb-1 font-semibold">{product.name}</h4>
-                <h6 className="mt-1 text-sm">
-                    {t('Price')} : {currency} {product.price}
-                </h6>
-                <h6 className="mt-1 text-sm">
-                    {t('Quantities')} : {product.quantity}
-                </h6>
-                <h6 className="mt-1 mb-3 text-sm">SKU : {product.sku}</h6>
-            </div>
-        </div>
-    );
+    const numVisible =
+        responsiveOptions.find(
+            (option) => window.innerWidth >= parseInt(option.breakpoint),
+        )?.numVisible || 1;
+
+    const showNavigators = products && products.length > numVisible;
 
     return (
         <div className="card">
@@ -62,7 +48,10 @@ export const OrderProduct: React.FC<OrderProductProps> = ({ order }) => {
                 numScroll={1}
                 numVisible={3}
                 responsiveOptions={responsiveOptions}
-                itemTemplate={productTemplate}
+                itemTemplate={(item) => (
+                    <ProductCard product={item} currency={currency as string} />
+                )}
+                showNavigators={showNavigators}
             />
         </div>
     );

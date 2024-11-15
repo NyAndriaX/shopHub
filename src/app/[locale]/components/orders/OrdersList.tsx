@@ -10,7 +10,6 @@ import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 
 interface OrdersListProps {
     ordersData: OrdersType[];
-    setOrder: React.Dispatch<React.SetStateAction<OrdersType | null>>;
 }
 
 interface FilterOptions {
@@ -18,10 +17,7 @@ interface FilterOptions {
     value: string;
 }
 
-export const OrdersList: React.FC<OrdersListProps> = ({
-    ordersData,
-    setOrder,
-}) => {
+export const OrdersList: React.FC<OrdersListProps> = ({ ordersData }) => {
     const t = useTranslations('OrdersPage');
     const { isMobile } = useWindow();
     const [searchTerm, setSearchTerm] = useState<string>('');
@@ -102,7 +98,7 @@ export const OrdersList: React.FC<OrdersListProps> = ({
                 className={`flex flex-col gap-4 items-start overflow-auto h-full p-4  ${isMobile && 'pb-24'} w-full`}
             >
                 {filteredOrders.map((order, index: number) => (
-                    <OrderItem key={index} order={order} setOrder={setOrder} />
+                    <OrderItem key={index} order={order} />
                 ))}
             </div>
         </div>
